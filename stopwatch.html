@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="stop watch, stop, clock, timer, watch, mini, project, mini project, high, best, html, css, javascript, fast, accurate, good, watches, count down">
+    <title>Stop Watch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: content-box;
+        }
+
+        .main {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgb(2, 0, 36);
+            background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+        }
+
+        .div {
+            height: 75vh;
+            min-width: 50vw;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .div input {
+            text-align: center;
+            padding: 10px 0;
+            font-size: 50px;
+            color: rgb(250, 249, 248);
+            background: transparent;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            border : none;
+        }
+
+        input::placeholder {
+            color: rgb(218, 22, 55);
+            color: rgb(249, 248, 245);
+        }
+
+        .button-div {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 10px;
+        }
+
+        .btn1 {
+            color: rgb(255, 255, 255);
+            background-color: rgba(9, 9, 121, 1);
+            font-weight: 100;
+            padding: 10px;
+            word-spacing: 0.5px;
+            /* width: 10vw; */
+        }
+
+        .div1 {
+            padding: 10px;
+            max-height: 30vh;
+            overflow-y: auto;
+        }
+
+        .p1 {
+            color: rgb(207, 137, 16)
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="div">
+            <input class="input" type="text" value="" placeholder="0" readonly>
+            <div class="button-div">
+                <button class="btn1 start">Start</button>
+                <button class="btn1 stop">Stop</button>
+                <button class="btn1 resume">Resume</button>
+                <button class="btn1 restart">Restart</button>
+                <button class="btn1 note">Note</button>
+            </div>
+            <div class="div1"></div>
+        </div>
+    </div>
+    <script>
+        count = 0;
+        var intervalId;
+        input = document.querySelector(".input")
+        start = document.querySelector(".start")
+        stop = document.querySelector(".stop")
+        resume = document.querySelector(".resume")
+        restart = document.querySelector(".restart")
+        note = document.querySelector(".note")
+        div1 = document.querySelector(".div1")
+        start1 = () => {
+            if (!intervalId) {
+                intervalId = setInterval(() => {
+                    count++;
+                    input.value = count;
+                }, 1000)
+            }
+        }
+        stop1 = () => {
+            clearInterval(intervalId);
+            intervalId = null;
+        }
+        retsart1 = () => {
+            count = 0;
+            input.value = count;
+            start1();
+        }
+        start.addEventListener("click", () => {
+            start1();
+        })
+        stop.addEventListener("click", () => {
+            stop1();
+        })
+        restart.addEventListener("click", () => {
+            retsart1();
+        })
+        resume.addEventListener("click", () => {
+            start1();
+        })
+        note.addEventListener("click", () => {
+            p1 = document.createElement("p");
+            p1.classList.add("p1");
+            s = input.value;
+            p1.innerText = `The time is noted at ${s} seconds`;
+            div1.append(p1);
+        })
+    </script>
+</body>
+
+</html>
